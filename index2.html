@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+</head>
+<body>
+
+<div class="dws-wrapper">
+  <form name="dwsForm">
+    <label>Приоритет:</label>
+    <select name="days" >
+      <option value="1 приоритет" >1 приоритет</option>
+      <option value="2 приоритет" >2 приоритет</option>
+      <option value="3 приоритет" >3 приоритет</option>
+    </select><br><br>
+    <textarea rows="5" 
+              cols="45" 
+              name="message" 
+              placeholder="Напишите текст заметки..." ></textarea><br>
+    <input type="button" value="Распечатать" onClick="prClick();">
+  </form><br>
+
+  <form>
+   <div id="diary"class="textarea" contenteditable="">
+   </div>
+    <input id="send" type="button" value="удалить" >
+  	<input id="send" type="button" value="сохранить" >
+  	<input id="send" type="button" value="редактировать" >
+  </form>
+
+  <textarea id="textarea" name="description" style="display:none"></textarea>
+
+<script src="5.js" =></script>
+</body>
+</html>
