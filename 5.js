@@ -27,17 +27,18 @@ function prClick() {
     let save = document.createElement("button") 
     save.innerHTML = "сохранить";
     save.addEventListener('click',ClickOnSave);
+    let newEl = document.createElement("textarea");
+
      function ClickOnSave() { 
-        let newEl = document.createElement("div");
-        newEl.textContent = noteText.textContent;
-        noteText.replaceWith(newEl);
+        noteText.textContent = newEl.textContent;
+        newEl.replaceWith(noteText);
     }
       
     let edit = document.createElement("button")
     edit.innerHTML = "изменить";
     edit.addEventListener('click',ClickOnEdit);
+
       function ClickOnEdit() { 
-        let newEl = document.createElement("textarea");
         newEl.textContent = noteText.textContent;
         noteText.replaceWith(newEl);
     }            
@@ -45,9 +46,11 @@ function prClick() {
     let deletebtn = document.createElement("button")
     deletebtn.innerHTML = "удалить";
     deletebtn.addEventListener('click',ClickOnDeletebtn);
+
      function ClickOnDeletebtn() { 
         noteText.remove();
     }
+    
     box.appendChild(noteId);
     box.appendChild(noteText);
     box.appendChild(notePrioritet);
