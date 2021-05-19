@@ -1,6 +1,7 @@
 let i = 1,          // счетчик
     arrNotes = [],  // массив заметок
-    form = document.dwsForm;
+    form = document.dwsForm,
+    state_change = 0;
 
 function prClick() {
     let priority = form.priority.value;
@@ -27,24 +28,25 @@ function prClick() {
     let save = document.createElement("button") 
     save.innerHTML = "сохранить";
     save.addEventListener('click',ClickOnSave);
-     function ClickOnSave() { 
-        let newEl = document.createElement("div");
-        newEl.textContent = noteText.textContent;
-        noteText.replaceWith(newEl);
+    let newEl = document.createElement("textarea");
+
+     function ClickOnSave() {
+        noteText.innerHTML = newEl.value;
+        newEl.replaceWith(noteText);
     }
-      
+
     let edit = document.createElement("button")
     edit.innerHTML = "изменить";
     edit.addEventListener('click',ClickOnEdit);
-      function ClickOnEdit() { 
-        let newEl = document.createElement("textarea");
-        newEl.textContent = noteText.textContent;
-        noteText.replaceWith(newEl);
-    }            
 
+    function ClickOnEdit() {                  
+            newEl.textContent = noteText.textContent;
+            noteText.replaceWith(newEl);
+        }        
     let deletebtn = document.createElement("button")
     deletebtn.innerHTML = "удалить";
     deletebtn.addEventListener('click',ClickOnDeletebtn);
+    
      function ClickOnDeletebtn() { 
         noteText.remove();
     }
