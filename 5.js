@@ -24,8 +24,6 @@ function prClick() {
     notePrioritet.innerHTML = note.prioritet;
     let noteText = document.createElement("div");
     noteText.innerHTML = note.text;
-    
-
     let save = document.createElement("button") 
     save.innerHTML = "сохранить";
     save.addEventListener('click',ClickOnSave);
@@ -42,7 +40,6 @@ function prClick() {
         let newEl = document.createElement("textarea");
         newEl.textContent = noteText.textContent;
         noteText.replaceWith(newEl);
-
     }            
 
     let deletebtn = document.createElement("button")
@@ -51,7 +48,6 @@ function prClick() {
      function ClickOnDeletebtn() { 
         noteText.remove();
     }
-
     box.appendChild(noteId);
     box.appendChild(noteText);
     box.appendChild(notePrioritet);
@@ -59,7 +55,6 @@ function prClick() {
     box.appendChild(save);
     box.appendChild(edit);
     box.appendChild(deletebtn);
-
     let contentArea = document.getElementById("contentArea");
     contentArea.appendChild(box); 
 }
