@@ -1,18 +1,17 @@
-let i = 1,          // счетчик
-    arrNotes = [],  // массив заметок
+let arrNotes = [],
     form = document.dwsForm;
 
 function prClick() {
     let priority = form.priority.value;
     let text = form.message.value;
     let note = {
-        id:i,
+        id:arrNotes.length+1,
         prioritet:priority,
         text:text,
-        date:new Date(),//Текущая дата 
+        date:new Date(),
     };
     arrNotes.push(note);
-    i++;
+
     form.reset();
     let box = document.createElement("div");
     box.id = note.id;
@@ -24,15 +23,15 @@ function prClick() {
     notePrioritet.innerHTML = note.prioritet;
     let noteText = document.createElement("div");
     noteText.innerHTML = note.text;
-    //todo добавить индентификатор текстового поля соответствующий id записи
-    //при редактировании и удалении искать по нему
+
     let save = document.createElement("button") 
     save.innerHTML = "сохранить";
     save.addEventListener('click',ClickOnSave);
     let newEl = document.createElement("textarea");
-    //todo вынести функцию
+
      function ClickOnSave() {
-        noteText.textContent = newEl.textContent;
+        if(!newEl.value) return;
+        noteText.textContent = newEl.value;
         newEl.replaceWith(noteText);
     }
       
