@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+</head>
+<body>
+<div class="dws-wrapper">
+  <form name="dwsForm">
+    <label>Приоритет:</label>
+    <select name="priority" >
+      <option value="1 приоритет" >1 приоритет</option>
+      <option value="2 приоритет" >2 приоритет</option>
+      <option value="3 приоритет" >3 приоритет</option>
+    </select><br><br>
+    <textarea rows="5" 
+              cols="45" 
+              name="message" 
+              placeholder="Напишите текст заметки..." ></textarea><br>
+    <input type="button" value="Добавить заметку" onClick="prClick();">
+  </form><br>
+</div>
+
+  <div id = "contentArea">
+  </div>
+
+<script src="index.js"></script>
+</body>
+</html>
