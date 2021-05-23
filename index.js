@@ -61,4 +61,15 @@ function prClick() {
     box.appendChild(deletebtn);
     let contentArea = document.getElementById("contentArea");
     contentArea.appendChild(box); 
+
+    //при нажатии на кнопку фильтра 
+    //происходит функция
+    let arrNotesTallprioritet = note.prioritet.filter (
+        function(TallPrioritet) {
+         return notePrioritet="1 приоритет";
+         note.remove();
+         //вывод нового массива
+        }
+        );
+
 }
