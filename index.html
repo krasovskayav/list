@@ -9,9 +9,10 @@
   <form name="dwsForm">
     <label>Приоритет:</label>
     <select name="priority" >
-      <option value="1 приоритет" >1 приоритет</option>
-      <option value="2 приоритет" >2 приоритет</option>
-      <option value="3 приоритет" >3 приоритет</option>
+      <option value="Completed" >Completed</option>
+      <option value="High" >High</option>
+      <option value="Medium" >Medium</option>
+      <option value="Low" >Low</option>
     </select><br><br>
     <textarea rows="5" 
               cols="45" 
@@ -23,7 +24,13 @@
 
   <div id = "contentArea">
   </div>
-
+<form name="prioritetForm">
+    <input type="radio" name="priority" checked="checked" value="Completed" /><span>Completed</span>
+    <input type="radio" name="priority" value="High" /><span>High</span>
+    <input type="radio" name="priority" value="Medium" /><span>Medium</span>
+    <input type="radio" name="priority" value="Low" /><span>Low</span>	
+</form>
+<div id="NewContentArea"></div>
 <script src="index.js"></script>
 </body>
 </html>
