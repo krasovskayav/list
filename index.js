@@ -1,15 +1,28 @@
-let arrNotes = [],
+const arrNotes = [];
     form = document.dwsForm;
-//todo вынести функции, привязанные к кнопкам удалить, сохранить, редактировать из функции добавления,
-// +добавить фильтр(четыре чекбокса) по приоритетам задач
-// (макеты есть в репозитории https://github.com/yuryweiland/oasu-junior-task)
-// подсказка небольшая по возможности можно уже начинать подключать бэк на save нужно будет всё же пробрасывать id тк
-// при сохранении на сервер нужно будет отправлять обновлённую запись целиком
-    let newEl = document.createElement("textarea");
+//todo используй let/const в тех местах, где это нужно
+//todo для хранения состояния фильтра используй доп.массив
+let newEl = document.createElement("textarea");
+
+function ClickOnEdit(noteText) {
+    newEl.textContent = noteText.textContent;
+    noteText.replaceWith(newEl);
+}
+
+function ClickOnDeletebtn(noteText) { 
+        noteText.remove();
+    }
+
+function ClickOnSave(noteText) {
+        if(!newEl.value) return;
+        noteText.textContent = newEl.value;
+        newEl.replaceWith(noteText);
+    }
 
 function prClick() {
     let priority = form.priority.value;
     let text = form.message.value;
+    //todo добавить флаг для филтрации
     let note = {
         id:arrNotes.length+1,
         prioritet:priority,
@@ -30,32 +43,23 @@ function prClick() {
     let noteText = document.createElement("div");
     noteText.innerHTML = note.text;
 
-    let save = document.createElement("button") 
+    let save = document.createElement("button");
     save.innerHTML = "сохранить";
-    save.addEventListener('click',ClickOnSave);
-     function ClickOnSave() {
-        if(!newEl.value) return;
-        noteText.textContent = newEl.value;
-        newEl.replaceWith(noteText);
-    }
-      
-    let edit = document.createElement("button")
+    save.addEventListener('click',function(){
+        ClickOnSave(noteText);
+    });
+     
+    let edit = document.createElement("button");
     edit.innerHTML = "изменить";
-    edit.addEventListener('click',ClickOnEdit);
-    function ClickOnEdit() {
-        if(noteText.value === '') {
-        console.log('Add A task');
-    }
-        newEl.textContent = noteText.textContent;
-        noteText.replaceWith(newEl);
-    }       
+    edit.addEventListener('click', function() {
+        ClickOnEdit(noteText);
+    });
 
-    let deletebtn = document.createElement("button")
+    let deletebtn = document.createElement("button");
     deletebtn.innerHTML = "удалить";
-    deletebtn.addEventListener('click',ClickOnDeletebtn); 
-    function ClickOnDeletebtn() { 
-        noteText.remove();
-    }
+    deletebtn.addEventListener('click',function(){
+        ClickOnDeletebtn(noteText);
+    });
     
     box.appendChild(noteId);
     box.appendChild(noteText);
@@ -65,33 +69,37 @@ function prClick() {
     box.appendChild(edit);
     box.appendChild(deletebtn);
 
-    let contentArea = document.getElementById("contentArea");
-    contentArea.appendChild(box); 
+    const contentArea = document.getElementById("contentArea");
+    contentArea.appendChild(box);
+}
 
-//функция нажатия на флажок приоритета для фильтрации(пока просто вывод значения выбранного флажка, без фильтра массива)
-    function onclickPrioritet(e){
-       let NewContentArea = document.getElementById("NewContentArea");
-       let priority = e.target.value;
-       let note = document.getElementById("note");
-       NewContentArea.textContent = priority+note;
-    }
-    for (var i = 0; i < prioritetForm.priority.length; i++) {
-     prioritetForm.priority[i].addEventListener("click", onclickPrioritet);
-    }
+function ClickOnPr1(priority1) {
+    let priority =  document.getElementById(priority1);
+    let ArrNoteWithFilter =  arrNotes.filter(function(arrNote) {
+    return arrNote.prioritet == "Completed";
+    });  
+    console.log(ArrNoteWithFilter);
+}
 
-//что-то про фильтр
-    let KnopkaTallFilter = document.createElement("button")
-    KnopkaTallFilter.innerHTML = "высокий приоритет фильтрация";
+function ClickOnPr2(priority2) {
+    let priority =  document.getElementById(priority2);
+    let ArrNoteWithFilter =  arrNotes.filter(function(arrNote) {
+    return arrNote.prioritet == "High";
+    });  
+    console.log(ArrNoteWithFilter);
+}
+function ClickOnPr3(priority3) {
+    let priority =  document.getElementById(priority3);
+    let ArrNoteWithFilter =  arrNotes.filter(function(arrNote) {
+    return arrNote.prioritet == "Medium";
+    });  
+    console.log(ArrNoteWithFilter);
+}
 
-    KnopkaTallFilter.addEventListener('click',ClickOnKnopkaTallFilter);//при нажатии на кнопку фильтра 
-    function ClickOnKnopkaTallFilter(){//происходит функция
-    let arrNotesTallprioritet = note.prioritet.filter (
-        function(TallPrioritet) {
-         return notePrioritet="1 приоритет";
-         note.remove();
-         //вывод нового массива
-        }
-        );
-    }
-
+function ClickOnPr4(priority4) {
+    let priority =  document.getElementById(priority2);
+    let ArrNoteWithFilter =  arrNotes.filter(function(arrNote) {
+    return arrNote.prioritet == "Low";
+    });  
+    console.log(ArrNoteWithFilter);
 }

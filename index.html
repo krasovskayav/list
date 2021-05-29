@@ -21,16 +21,14 @@
     <input type="button" value="Добавить заметку" onClick="prClick();">
   </form><br>
 </div>
-
-  <div id = "contentArea">
-  </div>
 <form name="prioritetForm">
-    <input type="radio" name="priority" checked="checked" value="Completed" /><span>Completed</span>
-    <input type="radio" name="priority" value="High" /><span>High</span>
-    <input type="radio" name="priority" value="Medium" /><span>Medium</span>
-    <input type="radio" name="priority" value="Low" /><span>Low</span>	
+    <input type="checkbox" id="priority1" onchange = "ClickOnPr1(priority1);" value="Completed" /><span>Completed</span>
+    <input type="checkbox" id="priority2" onchange = "ClickOnPr2(priority2);"value="High" /><span>High</span>
+    <input type="checkbox" id="priority3" onchange = "ClickOnPr3(priority3);"value="Medium" /><span>Medium</span>
+    <input type="checkbox" id="priority4" onchange = "ClickOnPr4(priority4);"value="Low" /><span>Low</span>  
 </form>
-<div id="NewContentArea"></div>
+<div id = "contentArea"></div>
+<div id="NewArrNote"></div>
 <script src="index.js"></script>
 </body>
 </html>
