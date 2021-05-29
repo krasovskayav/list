@@ -1,15 +1,16 @@
-let arrNotes = [],
+let arrNotes = [];
     form = document.dwsForm;
-//todo вынести функции, привязанные к кнопкам удалить, сохранить, редактировать из функции добавления,
-// +добавить фильтр(четыре чекбокса) по приоритетам задач
-// (макеты есть в репозитории https://github.com/yuryweiland/oasu-junior-task)
-// подсказка небольшая по возможности можно уже начинать подключать бэк на save нужно будет всё же пробрасывать id тк
-// при сохранении на сервер нужно будет отправлять обновлённую запись целиком
+//todo используй let/const в тех местах, где это нужно
+//todo для хранения состояния фильтра используй доп.массив
     let newEl = document.createElement("textarea");
-
+function ClickOnEdit(noteText) {
+    newEl.textContent = noteText.textContent;
+    noteText.replaceWith(newEl);
+}
 function prClick() {
     let priority = form.priority.value;
     let text = form.message.value;
+    //todo добавить флаг для филтрации
     let note = {
         id:arrNotes.length+1,
         prioritet:priority,
@@ -30,7 +31,7 @@ function prClick() {
     let noteText = document.createElement("div");
     noteText.innerHTML = note.text;
 
-    let save = document.createElement("button") 
+    let save = document.createElement("button");
     save.innerHTML = "сохранить";
     save.addEventListener('click',ClickOnSave);
      function ClickOnSave() {
@@ -39,18 +40,16 @@ function prClick() {
         newEl.replaceWith(noteText);
     }
       
-    let edit = document.createElement("button")
+    let edit = document.createElement("button");
     edit.innerHTML = "изменить";
-    edit.addEventListener('click',ClickOnEdit);
-    function ClickOnEdit() {
-        if(noteText.value === '') {
-        console.log('Add A task');
-    }
-        newEl.textContent = noteText.textContent;
-        noteText.replaceWith(newEl);
-    }       
+    //todo таким образом можно пробросить контекст. задаётся неименованная функция,
+    // в ней вызывается уже нормальная функция с привязанным контекстом
+    edit.addEventListener('click', function() {
+        ClickOnEdit(noteText);
+    });
 
-    let deletebtn = document.createElement("button")
+
+    let deletebtn = document.createElement("button");
     deletebtn.innerHTML = "удалить";
     deletebtn.addEventListener('click',ClickOnDeletebtn); 
     function ClickOnDeletebtn() { 
