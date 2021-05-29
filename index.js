@@ -42,18 +42,20 @@ function prClick() {
     let edit = document.createElement("button")
     edit.innerHTML = "изменить";
     edit.addEventListener('click',ClickOnEdit);
-    function ClickOnDeletebtn() { 
-        noteText.remove();
+    function ClickOnEdit() {
+        if(noteText.value === '') {
+        console.log('Add A task');
     }
-
-      function ClickOnEdit() {
         newEl.textContent = noteText.textContent;
         noteText.replaceWith(newEl);
-    }            
+    }       
 
     let deletebtn = document.createElement("button")
     deletebtn.innerHTML = "удалить";
     deletebtn.addEventListener('click',ClickOnDeletebtn); 
+    function ClickOnDeletebtn() { 
+        noteText.remove();
+    }
     
     box.appendChild(noteId);
     box.appendChild(noteText);
@@ -70,8 +72,8 @@ function prClick() {
     function onclickPrioritet(e){
        let NewContentArea = document.getElementById("NewContentArea");
        let priority = e.target.value;
-       let noteText = document.getElementById("noteText");
-       NewContentArea.textContent = priority+noteText;
+       let note = document.getElementById("note");
+       NewContentArea.textContent = priority+note;
     }
     for (var i = 0; i < prioritetForm.priority.length; i++) {
      prioritetForm.priority[i].addEventListener("click", onclickPrioritet);
