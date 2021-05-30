@@ -1,7 +1,9 @@
+//todo используй let/const в тех местах, где это нужно
 const arrNotes = [];
     form = document.dwsForm;
-//todo используй let/const в тех местах, где это нужно
 let newEl = document.createElement("textarea");
+let box = document.createElement("div");
+const FilterState =[];
 
 function ClickOnEdit(noteText) {
     newEl.textContent = noteText.textContent;
@@ -17,21 +19,8 @@ function ClickOnSave(noteText) {
         noteText.textContent = newEl.value;
         newEl.replaceWith(noteText);
     }
-//todo вынести логику отрисовки в отдельную функцию
-function prClick() {
-    let priority = form.priority.value;
-    let text = form.message.value;
-    //todo добавить флаг для филтрации
-    let note = {
-        id:arrNotes.length+1,
-        prioritet:priority,
-        text:text,
-        date:new Date(),
-    };
-    arrNotes.push(note);
 
-    form.reset();
-    let box = document.createElement("div");
+function Otrisovka(note){
     box.id = note.id;
     let noteDate = document.createElement("div");
     noteDate.innerHTML = note.date;
@@ -71,39 +60,53 @@ function prClick() {
     const contentArea = document.getElementById("contentArea");
     contentArea.appendChild(box);
 }
+
+function prClick() {
+    let priority = form.priority.value;
+    let text = form.message.value;
+    //todo добавить флаг для филтрации
+    let note = {
+        id:arrNotes.length+1,
+        prioritet:priority,
+        text:text,
+        date:new Date(),
+    };
+    arrNotes.push(note);
+
+    form.reset();
+    
+    Otrisovka(note);
+}
+
+document.getElementById("Completed").addEventListener("change", function(event){
+ClickonPr(event);
+});
+
+document.getElementById("Medium").addEventListener("change", function(event){
+ClickonPr(event);
+});
+
+document.getElementById("High").addEventListener("change", function(event){
+ClickonPr(event);
+});
+
+document.getElementById("Low").addEventListener("change", function(event){
+ClickonPr(event);
+});
+
+function ClickonPr(event){
+    if (event.target.checked){
+        FilterState.push(event.target.id);
+    } 
+    else {
+        FilterState.shift(event.target.id)
+    }
+    console.log(FilterState);
+}
+
 //todo обработка события смены значения чекбокса
 // document.getElementById('Completed').addEventListener('change', function (event) {
 //    ClickOnPr(event);
 // });
 //todo оставить только одну функцию, какой приоритет выбран определять через event.target
 //todo не забудь поменять id в шаблоне
-function ClickOnPr1(priority1) {
-    let priority =  document.getElementById(priority1);
-    let ArrNoteWithFilter =  arrNotes.filter(function(arrNote) {
-    return arrNote.prioritet == "Completed";
-    });  
-    console.log(ArrNoteWithFilter);
-}
-
-function ClickOnPr2(priority2) {
-    let priority =  document.getElementById(priority2);
-    let ArrNoteWithFilter =  arrNotes.filter(function(arrNote) {
-    return arrNote.prioritet == "High";
-    });  
-    console.log(ArrNoteWithFilter);
-}
-function ClickOnPr3(priority3) {
-    let priority =  document.getElementById(priority3);
-    let ArrNoteWithFilter =  arrNotes.filter(function(arrNote) {
-    return arrNote.prioritet == "Medium";
-    });  
-    console.log(ArrNoteWithFilter);
-}
-
-function ClickOnPr4(priority4) {
-    let priority =  document.getElementById(priority2);
-    let ArrNoteWithFilter =  arrNotes.filter(function(arrNote) {
-    return arrNote.prioritet == "Low";
-    });  
-    console.log(ArrNoteWithFilter);
-}
