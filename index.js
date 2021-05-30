@@ -1,7 +1,6 @@
 const arrNotes = [];
     form = document.dwsForm;
 //todo используй let/const в тех местах, где это нужно
-//todo для хранения состояния фильтра используй доп.массив
 let newEl = document.createElement("textarea");
 
 function ClickOnEdit(noteText) {
@@ -18,7 +17,7 @@ function ClickOnSave(noteText) {
         noteText.textContent = newEl.value;
         newEl.replaceWith(noteText);
     }
-
+//todo вынести логику отрисовки в отдельную функцию
 function prClick() {
     let priority = form.priority.value;
     let text = form.message.value;
@@ -72,7 +71,12 @@ function prClick() {
     const contentArea = document.getElementById("contentArea");
     contentArea.appendChild(box);
 }
-
+//todo обработка события смены значения чекбокса
+// document.getElementById('Completed').addEventListener('change', function (event) {
+//    ClickOnPr(event);
+// });
+//todo оставить только одну функцию, какой приоритет выбран определять через event.target
+//todo не забудь поменять id в шаблоне
 function ClickOnPr1(priority1) {
     let priority =  document.getElementById(priority1);
     let ArrNoteWithFilter =  arrNotes.filter(function(arrNote) {
