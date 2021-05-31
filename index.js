@@ -1,13 +1,18 @@
-//todo используй let/const в тех местах, где это нужно
 const arrNotes = [];
     form = document.dwsForm;
-let newEl = document.createElement("textarea");
-let box = document.createElement("div");
+const newEl = document.createElement("textarea");
+const select = document.createElement("select");
+const option = document.createElement('option');
+const box = document.createElement("div");
 const FilterState =[];
 
-function ClickOnEdit(noteText) {
+function ClickOnEdit(noteText,notePrioritet) {
     newEl.textContent = noteText.textContent;
     noteText.replaceWith(newEl);
+
+    notePrioritet.replaceWith(select);
+    option.textContent = "Completed";
+    select.appendChild(option);
 }
 
 function ClickOnDeletebtn(noteText) { 
@@ -22,28 +27,28 @@ function ClickOnSave(noteText) {
 
 function Otrisovka(note){
     box.id = note.id;
-    let noteDate = document.createElement("div");
+    const noteDate = document.createElement("div");
     noteDate.innerHTML = note.date;
-    let noteId = document.createElement("div");
+    const noteId = document.createElement("div");
     noteId.innerHTML = note.id;
-    let notePrioritet = document.createElement("div");
+    const notePrioritet = document.createElement("div");
     notePrioritet.innerHTML = note.prioritet;
-    let noteText = document.createElement("div");
+    const noteText = document.createElement("div");
     noteText.innerHTML = note.text;
 
-    let save = document.createElement("button");
+    const save = document.createElement("button");
     save.innerHTML = "сохранить";
     save.addEventListener('click',function(){
         ClickOnSave(noteText);
     });
      
-    let edit = document.createElement("button");
+    const edit = document.createElement("button");
     edit.innerHTML = "изменить";
     edit.addEventListener('click', function() {
-        ClickOnEdit(noteText);
+        ClickOnEdit(noteText,notePrioritet);
     });
 
-    let deletebtn = document.createElement("button");
+    const deletebtn = document.createElement("button");
     deletebtn.innerHTML = "удалить";
     deletebtn.addEventListener('click',function(){
         ClickOnDeletebtn(noteText);
@@ -62,10 +67,10 @@ function Otrisovka(note){
 }
 
 function prClick() {
-    let priority = form.priority.value;
-    let text = form.message.value;
+    const priority = form.priority.value;
+    const text = form.message.value;
     //todo добавить флаг для филтрации
-    let note = {
+    const note = {
         id:arrNotes.length+1,
         prioritet:priority,
         text:text,
@@ -95,15 +100,14 @@ ClickonPr(event);
 });
 
 function ClickonPr(event){
-    if (event.target.checked){
-        FilterState.push(event.target.id);
-    } 
+    console.log(event.target.checked);
+    console.log(event.target.id);
+    if (event.target.checked) FilterState.push(event.target.id);
     else {
-        FilterState.shift(event.target.id)
+        FilterState.shift(event.target.id);
     }
     console.log(FilterState);
 }
-
 //todo обработка события смены значения чекбокса
 // document.getElementById('Completed').addEventListener('change', function (event) {
 //    ClickOnPr(event);
