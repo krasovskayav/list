@@ -3,8 +3,10 @@ const arrNotes = [];
 const newEl = document.createElement("textarea");
 const select = document.createElement("select");
 const option = document.createElement('option');
-const box = document.createElement("div");
 const FilterState =[];
+ const contentArea = document.getElementById("contentArea");
+const date = new Date();
+console.log(date.getMonth()+1);
 
 function ClickOnEdit(noteText,notePrioritet) {
     newEl.textContent = noteText.textContent;
@@ -13,6 +15,8 @@ function ClickOnEdit(noteText,notePrioritet) {
     notePrioritet.replaceWith(select);
     option.textContent = "Completed";
     select.appendChild(option);
+
+
 }
 
 function ClickOnDeletebtn(noteText) { 
@@ -26,6 +30,7 @@ function ClickOnSave(noteText) {
     }
 
 function Otrisovka(note){
+    const box = document.createElement("div");
     box.id = note.id;
     const noteDate = document.createElement("div");
     noteDate.innerHTML = note.date;
@@ -100,14 +105,27 @@ ClickonPr(event);
 });
 
 function ClickonPr(event){
+    contentArea.innerHTML = "";
     console.log(event.target.checked);
     console.log(event.target.id);
     if (event.target.checked) FilterState.push(event.target.id);
     else {
-        FilterState.shift(event.target.id);
+        FilterState.splice(FilterState.indexOf(event.target.id),1);
     }
     console.log(FilterState);
+    //const FilterPrioritet = arrNotes.filter(function (arrNote){
+    //return FilterState.includes(arrNote.prioritet);
+    //});
+    const FilterPrioritet = arrNotes.filter((arrNote) => FilterState.includes(arrNote.prioritet));
+    console.log(FilterPrioritet);
+    FilterPrioritet.forEach(function(note){
+       Otrisovka(note);
+    });
+    console.log(contentArea);
 }
+
+
+
 //todo обработка события смены значения чекбокса
 // document.getElementById('Completed').addEventListener('change', function (event) {
 //    ClickOnPr(event);
