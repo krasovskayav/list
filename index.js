@@ -1,22 +1,12 @@
 const arrNotes = [];
     form = document.dwsForm;
 const newEl = document.createElement("textarea");
-const select = document.createElement("select");
-const option = document.createElement('option');
-const FilterState =[];
+const ArrayOfCheckedCheckbox =[];
  const contentArea = document.getElementById("contentArea");
-const date = new Date();
-console.log(date.getMonth()+1);
 
-function ClickOnEdit(noteText,notePrioritet) {
-    newEl.textContent = noteText.textContent;
+function ClickOnEdit(noteText) {
+    newEl.value = noteText.textContent;
     noteText.replaceWith(newEl);
-
-    notePrioritet.replaceWith(select);
-    option.textContent = "Completed";
-    select.appendChild(option);
-
-
 }
 
 function ClickOnDeletebtn(noteText) { 
@@ -42,19 +32,19 @@ function Otrisovka(note){
     noteText.innerHTML = note.text;
 
     const save = document.createElement("button");
-    save.innerHTML = "сохранить";
+    save.innerHTML = "save";
     save.addEventListener('click',function(){
         ClickOnSave(noteText);
     });
      
     const edit = document.createElement("button");
-    edit.innerHTML = "изменить";
+    edit.innerHTML = "edit";
     edit.addEventListener('click', function() {
-        ClickOnEdit(noteText,notePrioritet);
+        ClickOnEdit(noteText);
     });
 
     const deletebtn = document.createElement("button");
-    deletebtn.innerHTML = "удалить";
+    deletebtn.innerHTML = "delete";
     deletebtn.addEventListener('click',function(){
         ClickOnDeletebtn(noteText);
     });
@@ -74,7 +64,6 @@ function Otrisovka(note){
 function prClick() {
     const priority = form.priority.value;
     const text = form.message.value;
-    //todo добавить флаг для филтрации
     const note = {
         id:arrNotes.length+1,
         prioritet:priority,
@@ -106,29 +95,15 @@ ClickonPr(event);
 
 function ClickonPr(event){
     contentArea.innerHTML = "";
-    console.log(event.target.checked);
-    console.log(event.target.id);
-    if (event.target.checked) FilterState.push(event.target.id);
+    if (event.target.checked) ArrayOfCheckedCheckbox.push(event.target.id);
     else {
-        FilterState.splice(FilterState.indexOf(event.target.id),1);
+        ArrayOfCheckedCheckbox.splice(ArrayOfCheckedCheckbox.indexOf(event.target.id),1);
     }
-    console.log(FilterState);
-    //const FilterPrioritet = arrNotes.filter(function (arrNote){
-    //return FilterState.includes(arrNote.prioritet);
+    //const FilteredNotes = arrNotes.filter(function (arrNote){
+    //return ArrayOfCheckedCheckbox.includes(arrNote.prioritet);
     //});
-    const FilterPrioritet = arrNotes.filter((arrNote) => FilterState.includes(arrNote.prioritet));
-    console.log(FilterPrioritet);
-    FilterPrioritet.forEach(function(note){
+    const FilteredNotes = arrNotes.filter((arrNote) => ArrayOfCheckedCheckbox.includes(arrNote.prioritet));
+    FilteredNotes.forEach(function(note){
        Otrisovka(note);
     });
-    console.log(contentArea);
 }
-
-
-
-//todo обработка события смены значения чекбокса
-// document.getElementById('Completed').addEventListener('change', function (event) {
-//    ClickOnPr(event);
-// });
-//todo оставить только одну функцию, какой приоритет выбран определять через event.target
-//todo не забудь поменять id в шаблоне
