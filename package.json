@@ -1,0 +1,28 @@
+{
+  "name": "list",
+  "version": "1.0.0",
+  "description": "находит заметку по id",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/krasovskayav/list.git"
+  },
+  "keywords": [
+    "id",
+    "prioritet",
+    "text",
+    "name"
+  ],
+  "author": "ViktoriaK",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/krasovskayav/list/issues"
+  },
+  "homepage": "https://github.com/krasovskayav/list#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
