@@ -12,6 +12,7 @@ const items = [];
 app.get('/items', (req, res) => {
     setTimeout(() => {
         res.send(items);
+        res.sendfile('index.html');
     }, 2000);
 });
 
