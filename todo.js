@@ -3,30 +3,31 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const app = express();
 
+
 app.use(cors());
 app.use(bodyParser.json());
 
 let id = 1;
-const items = [];
+//const items = [];
 
-app.get('/items', (req, res) => {
+app.get('/index', (req, res) => {
     setTimeout(() => {
-        res.send(items);
-        res.sendfile('index.html');
+        //res.send(items);
+        res.sendFile(__dirname+'/index.html');
     }, 2000);
 });
 
-app.post('/items', (req, res) => {
-    items.push({
+app.post('/index', (req, res) => {
+    index.push({
         ...req.body,
         id: id++
     });
 
-    res.json(items[items.length - 1]);
+    res.json(index[index.length - 1]);
 });
 
-app.put('/items/:itemId', (req, res) => {
-    const foundItem = items.find(item => item.id === parseInt(req.params.itemId));
+app.put('/index/:indexId', (req, res) => {
+    const foundItem = index.find(item => item.id === parseInt(req.params.itemId));
 
     Object.keys(req.body).forEach(key => {
         if (key !== 'id') {
@@ -37,11 +38,11 @@ app.put('/items/:itemId', (req, res) => {
     res.json(foundItem);
 });
 
-app.delete('/items/:itemId', (req, res) => {
-    const foundIndex = items.findIndex(item => item.id === parseInt(req.params.itemId));
-    const foundItem = items[foundIndex];
+app.delete('/index/:itemId', (req, res) => {
+    const foundIndex = index.findIndex(item => item.id === parseInt(req.params.itemId));
+    const foundItem = index[foundIndex];
 
-    items.splice(foundIndex, 1);
+    index.splice(foundIndex, 1);
 
     res.json(foundItem);
 });
