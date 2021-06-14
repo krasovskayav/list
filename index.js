@@ -112,7 +112,7 @@ function ClickonPr(event){
 let xhr = new XMLHttpRequest();
 
 // 2. Настраиваем его: GET-запрос по URL /article/.../load
-xhr.open('GET', '/index.html');
+xhr.open('GET', 'http://127.0.0.1:3000/items');
 
 // 3. Отсылаем запрос
 xhr.send();
