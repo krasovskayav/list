@@ -75,6 +75,10 @@ function prClick() {
     form.reset();
     
     Otrisovka(note);
+
+    xhrPost.send(JSON.stringify(note));//тип ответа json нравится больше,поэтому используем JSON.stringify и отправляем данные как строку. 
+    //JSON- глобальная автоматическая переменная с автоматическим свойством stringify, которая форматирует переменную в строку. 
+    //Нам же нужно отформатировать объект note в строку и отправить на post серверу.
 }
 
 document.getElementById("Completed").addEventListener("change", function(event){
@@ -108,36 +112,24 @@ function ClickonPr(event){
     });
 }
 
-// 1. Создаём новый XMLHttpRequest-объект
-let xhr = new XMLHttpRequest();
-
-// 2. Настраиваем его: GET-запрос по URL /article/.../load
-xhr.open('GET', 'http://127.0.0.1:3000/items');
-
-// 3. Отсылаем запрос
-xhr.send();
-
-xhr.responseType = 'json';
-
-// 4. Этот код сработает после того, как мы получим ответ сервера
-xhr.onload = function() {
-  let responseObj = xhr.response;
-  alert(responseObj.message); // Привет, мир!
+let xhrGet = new XMLHttpRequest(); // Создаём локальную переменную XHR, которая будет объектом XMLHttpRequest
+xhrGet.open('GET', 'http://127.0.0.1:3000/items'); // Задаём метод запроса и URL  запроса
+xhrGet.responseType = 'json'; //тип ответа - json
+xhrGet.onload = function() { // Используем обработчик событий onload, чтобы поймать ответ сервера XMLHttpRequest
+  //let responseObj = xhrGet.response;
+  console.log(xhrGet.response) // Выводим в консоль содержимое ответа сервера. Это строка!
+  //console.log(JSON.parse(xhrGet.response))//Выводим в консоль содержимое ответа сервера. Метод JSON.parse() разбирает строку JSON на объект.
 };
-
-xhr.onprogress = function(event) {
-  if (event.lengthComputable) {
-    alert(`Получено ${event.loaded} из ${event.total} байт`);
-  } else {
-    alert(`Получено ${event.loaded} байт`); // если в ответе нет заголовка Content-Length
-  }
-
-};
-
-xhr.onerror = function() {
+xhrGet.onerror = function() {
   alert("Запрос не удался");
 };
-req.addEventListener("load", function() {
-  console.log(req.statusCode);
-});
-req.send(null);
+xhrGet.send(); // Инициирует запрос. Посылаем запрос на сервер.
+
+
+
+let xhrPost = new XMLHttpRequest();
+xhrPost.open('POST', 'http://127.0.0.1:3000/items');
+//post-запрос происходит при нажатии на кнопку "add note", за действия которой отвечает функция prClick(), поэтому в той функции мы и пишем продолжение кода post-запроса.
+xhrPost.setRequestHeader('Content-type', 'application/json; charset=utf-8');// Идентификатор файла, чтобы сервер знал, что мы загружаем
+//Устанавливает заголовок запроса с именем name и значением value. 
+//Без этой строчки в консоль выведется массив, состоящий только из id-шников.

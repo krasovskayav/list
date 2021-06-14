@@ -10,12 +10,15 @@ let id = 1;
 const items = [];
 
 app.get('/items', (req, res) => {
-    setTimeout(() => {
-        res.send(items);
-    }, 2000);
+    //setTimeout(() => {
+        //res.send(items);
+    //}, 2000);
+    res.send(items);
+
 });
 
 app.post('/items', (req, res) => {
+    console.log(req.body);
     items.push({
         ...req.body,
         id: id++
