@@ -107,3 +107,37 @@ function ClickonPr(event){
        Otrisovka(note);
     });
 }
+
+// 1. Создаём новый XMLHttpRequest-объект
+let xhr = new XMLHttpRequest();
+
+// 2. Настраиваем его: GET-запрос по URL /article/.../load
+xhr.open('GET', '/index.html');
+
+// 3. Отсылаем запрос
+xhr.send();
+
+xhr.responseType = 'json';
+
+// 4. Этот код сработает после того, как мы получим ответ сервера
+xhr.onload = function() {
+  let responseObj = xhr.response;
+  alert(responseObj.message); // Привет, мир!
+};
+
+xhr.onprogress = function(event) {
+  if (event.lengthComputable) {
+    alert(`Получено ${event.loaded} из ${event.total} байт`);
+  } else {
+    alert(`Получено ${event.loaded} байт`); // если в ответе нет заголовка Content-Length
+  }
+
+};
+
+xhr.onerror = function() {
+  alert("Запрос не удался");
+};
+req.addEventListener("load", function() {
+  console.log(req.statusCode);
+});
+req.send(null);

@@ -7,7 +7,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 let id = 1;
-const items = require('/index.html');
+const items = [];
 
 app.get('/items', (req, res) => {
     setTimeout(() => {
