@@ -59,6 +59,9 @@ function Otrisovka(note){
 
     const contentArea = document.getElementById("contentArea");
     contentArea.appendChild(box);
+
+    xhrPut.send(JSON.stringify(noteText));
+    xhrDelete.send(JSON.stringify(noteText));
 }
 
 function prClick() {
@@ -112,8 +115,11 @@ function ClickonPr(event){
     });
 }
 
+
+let url = 'http://127.0.0.1:3000/items';
+
 let xhrGet = new XMLHttpRequest(); // Создаём локальную переменную XHR, которая будет объектом XMLHttpRequest
-xhrGet.open('GET', 'http://127.0.0.1:3000/items'); // Задаём метод запроса и URL  запроса
+xhrGet.open('GET', url, true); // Задаём метод запроса и URL  запроса
 xhrGet.responseType = 'json'; //тип ответа - json
 xhrGet.onload = function() { // Используем обработчик событий onload, чтобы поймать ответ сервера XMLHttpRequest
   //let responseObj = xhrGet.response;
@@ -128,8 +134,22 @@ xhrGet.send(); // Инициирует запрос. Посылаем запро
 
 
 let xhrPost = new XMLHttpRequest();
-xhrPost.open('POST', 'http://127.0.0.1:3000/items');
+xhrPost.open('POST', url, true);
 //post-запрос происходит при нажатии на кнопку "add note", за действия которой отвечает функция prClick(), поэтому в той функции мы и пишем продолжение кода post-запроса.
 xhrPost.setRequestHeader('Content-type', 'application/json; charset=utf-8');// Идентификатор файла, чтобы сервер знал, что мы загружаем
 //Устанавливает заголовок запроса с именем name и значением value. 
 //Без этой строчки в консоль выведется массив, состоящий только из id-шников.
+
+let xhrPut = new XMLHttpRequest();
+xhrPut.open('PUT', url+'/:itemId');
+xhrPut.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+xhrPut.onload = function() { 
+    Otrisovka(note);
+};
+
+let xhrDelete = new XMLHttpRequest;
+xhrDelete.open('DELETE', url+'/:itemId');
+xhrDelete.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+xhrDelete.onload = function() { 
+    Otrisovka(note);
+};
