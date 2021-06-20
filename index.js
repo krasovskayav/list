@@ -17,6 +17,7 @@ function ClickOnSave(noteText) {
         if(!newEl.value) return;
         noteText.textContent = newEl.value;
         newEl.replaceWith(noteText);
+        xhrPut.send(JSON.stringify(noteText));
     }
 
 function Otrisovka(note){
@@ -60,7 +61,7 @@ function Otrisovka(note){
     const contentArea = document.getElementById("contentArea");
     contentArea.appendChild(box);
 
-    xhrPut.send(JSON.stringify(noteText));
+    
     xhrDelete.send(JSON.stringify(noteText));
 }
 
