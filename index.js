@@ -13,13 +13,14 @@ function ClickOnDeletebtn(noteText) {
         noteText.remove();
     }
 
-function ClickOnSave(noteText) {
+function ClickOnSave(noteText, note) {
         if(!newEl.value) return;
         noteText.textContent = newEl.value;
+        note.text=newEl.value;
+        updateNote(note.id, note);
         newEl.replaceWith(noteText);
-        xhrPut.send(JSON.stringify(noteText));
     }
-
+    
 function Otrisovka(note){
     const box = document.createElement("div");
     box.id = note.id;
@@ -35,7 +36,7 @@ function Otrisovka(note){
     const save = document.createElement("button");
     save.innerHTML = "save";
     save.addEventListener('click',function(){
-        ClickOnSave(noteText);
+        ClickOnSave(noteText, note);
     });
      
     const edit = document.createElement("button");
@@ -61,8 +62,8 @@ function Otrisovka(note){
     const contentArea = document.getElementById("contentArea");
     contentArea.appendChild(box);
 
-    
-    xhrDelete.send(JSON.stringify(noteText));
+    //xhrPut.send(JSON.stringify(noteText));
+    //xhrDelete.send(JSON.stringify(noteText));
 }
 
 function prClick() {
@@ -117,13 +118,17 @@ function ClickonPr(event){
 }
 
 
-let url = 'http://127.0.0.1:3000/items';
+const url = 'http://127.0.0.1:3000/items';
 
-let xhrGet = new XMLHttpRequest(); // Создаём локальную переменную XHR, которая будет объектом XMLHttpRequest
+const xhrGet = new XMLHttpRequest(); // Создаём локальную переменную XHR, которая будет объектом XMLHttpRequest
 xhrGet.open('GET', url, true); // Задаём метод запроса и URL  запроса
 xhrGet.responseType = 'json'; //тип ответа - json
 xhrGet.onload = function() { // Используем обработчик событий onload, чтобы поймать ответ сервера XMLHttpRequest
   //let responseObj = xhrGet.response;
+  arrNotes = xhrGet.response;
+  xhrGet.response.forEach((item) => {
+    Otrisovka(item);
+  });
   console.log(xhrGet.response) // Выводим в консоль содержимое ответа сервера. Это строка!
   //console.log(JSON.parse(xhrGet.response))//Выводим в консоль содержимое ответа сервера. Метод JSON.parse() разбирает строку JSON на объект.
 };
@@ -134,23 +139,29 @@ xhrGet.send(); // Инициирует запрос. Посылаем запро
 
 
 
-let xhrPost = new XMLHttpRequest();
+const xhrPost = new XMLHttpRequest();
 xhrPost.open('POST', url, true);
 //post-запрос происходит при нажатии на кнопку "add note", за действия которой отвечает функция prClick(), поэтому в той функции мы и пишем продолжение кода post-запроса.
 xhrPost.setRequestHeader('Content-type', 'application/json; charset=utf-8');// Идентификатор файла, чтобы сервер знал, что мы загружаем
 //Устанавливает заголовок запроса с именем name и значением value. 
 //Без этой строчки в консоль выведется массив, состоящий только из id-шников.
 
-let xhrPut = new XMLHttpRequest();
-xhrPut.open('PUT', url+'/:itemId');
-xhrPut.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-xhrPut.onload = function() { 
-    Otrisovka(note);
-};
+const xhrPut = new XMLHttpRequest();
+function updateNote(noteId, note){
+    xhrPut.open('PUT', url+"/"+'$(noteId)');
+    xhrPut.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+    xhrPut.send(JSON.stringify(note));
+}
+// xhrPut.onload = function() { 
+//     Otrisovka(note);
+// };
 
-let xhrDelete = new XMLHttpRequest;
-xhrDelete.open('DELETE', url+'/:itemId');
-xhrDelete.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-xhrDelete.onload = function() { 
-    Otrisovka(note);
-};
+const xhrDelete = new XMLHttpRequest;
+function deleteFromServer(id){
+   xhrDelete.open('DELETE', url+"/"+'$(id)');
+   xhrDelete.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+   xhrDelete.send();
+  }
+// xhrDelete.onload = function() { 
+//     Otrisovka(note);
+// };
