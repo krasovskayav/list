@@ -75,12 +75,13 @@ function prClick() {
         text:text,
         date:new Date(),
     };
-    arrNotes.push(note);
+   // arrNotes.push(note);
 
     form.reset();
     
-    Otrisovka(note);
-
+ //   Otrisovka(note);
+xhrPost.open('POST', url, true);
+xhrPost.setRequestHeader('Content-type', 'application/json; charset=utf-8');// Идентификатор файла, чтобы сервер знал, что мы загружаем
     xhrPost.send(JSON.stringify(note));//тип ответа json нравится больше,поэтому используем JSON.stringify и отправляем данные как строку. 
     //JSON- глобальная автоматическая переменная с автоматическим свойством stringify, которая форматирует переменную в строку. 
     //Нам же нужно отформатировать объект note в строку и отправить на post серверу.
@@ -140,15 +141,18 @@ xhrGet.send(); // Инициирует запрос. Посылаем запро
 
 
 const xhrPost = new XMLHttpRequest();
-xhrPost.open('POST', url, true);
-//post-запрос происходит при нажатии на кнопку "add note", за действия которой отвечает функция prClick(), поэтому в той функции мы и пишем продолжение кода post-запроса.
-xhrPost.setRequestHeader('Content-type', 'application/json; charset=utf-8');// Идентификатор файла, чтобы сервер знал, что мы загружаем
+xhrPost.onload = function (argument) {
+    const note = JSON.parse(xhrPost.response);
+    console.log(xhrPost.response);
+        arrNotes.push(note);
+    Otrisovka(note);
+}
 //Устанавливает заголовок запроса с именем name и значением value. 
 //Без этой строчки в консоль выведется массив, состоящий только из id-шников.
 
 const xhrPut = new XMLHttpRequest();
-function updateNote(noteId, note){
-    xhrPut.open('PUT', url+"/"+'$(noteId)');
+function updateNote(itemId, note){
+    xhrPut.open('PUT', url+"/"+ itemId.toString());
     xhrPut.setRequestHeader('Content-type', 'application/json; charset=utf-8');
     xhrPut.send(JSON.stringify(note));
 }
@@ -157,8 +161,8 @@ function updateNote(noteId, note){
 // };
 
 const xhrDelete = new XMLHttpRequest;
-function deleteFromServer(id){
-   xhrDelete.open('DELETE', url+"/"+'$(id)');
+function deleteFromServer(itemId){
+   xhrDelete.open('DELETE', url+"/"+itemId.toString());
    xhrDelete.setRequestHeader('Content-type', 'application/json; charset=utf-8');
    xhrDelete.send();
   }
