@@ -125,7 +125,6 @@ xhrGet.open('GET', url, true); // Задаём метод запроса и URL 
 xhrGet.responseType = 'json'; //тип ответа - json
 xhrGet.onload = function() { // Используем обработчик событий onload, чтобы поймать ответ сервера XMLHttpRequest
   //let responseObj = xhrGet.response;
-  Otrisovka(item);
   arrNotes = xhrGet.response;
   xhrGet.response.forEach((item) => {
     Otrisovka(item);
