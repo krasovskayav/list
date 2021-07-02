@@ -106,6 +106,12 @@ function ClickonPr(event){
     //const FilteredNotes = arrNotes.filter(function (arrNote){
     //return ArrayOfCheckedCheckbox.includes(arrNote.prioritet);
     //});
+    if (ArrayOfCheckedCheckbox.length == 0) {
+        arrNotes.forEach(function(note){
+       Otrisovka(note);
+    });
+        contentArea.innerHTML= JSON.parse(arrNotes);
+    }
     const FilteredNotes = arrNotes.filter((arrNote) => ArrayOfCheckedCheckbox.includes(arrNote.prioritet));
     FilteredNotes.forEach(function(note){
        Otrisovka(note);
@@ -130,7 +136,6 @@ xhrGet.onerror = function() {
 };
 xhrGet.send(); // Инициирует запрос. Посылаем запрос на сервер.
 
-if (ArrayOfCheckedCheckbox.length == 0) contentArea.innerHTML= JSON.parse(xhrGet.response);
 const xhrPost = new XMLHttpRequest();
 xhrPost.onload = function (argument) {
     const note = JSON.parse(xhrPost.response);
