@@ -9,9 +9,9 @@ function ClickOnEdit(noteText) {
     noteText.replaceWith(newEl);
 }
 
-function ClickOnDeletebtn(noteText) { 
+function ClickOnDeletebtn(noteText, note) { 
         noteText.remove();
-        deleteFromServer(note.id);
+        deleteFromServer(note.id, note);
     }
 
 function ClickOnSave(noteText, note) {
@@ -49,7 +49,7 @@ function Otrisovka(note){
     const deletebtn = document.createElement("button");
     deletebtn.innerHTML = "delete";
     deletebtn.addEventListener('click',function(){
-        ClickOnDeletebtn(noteText);
+        ClickOnDeletebtn(noteText, note);
     });
     
     box.appendChild(noteId);
@@ -71,20 +71,14 @@ function prClick() {
         text:text,
         date:new Date(),
     };
-   // arrNotes.push(note);
 
     form.reset();
-    
- //   Otrisovka(note);
+
 xhrPost.open('POST', url, true);
 xhrPost.setRequestHeader('Content-type', 'application/json; charset=utf-8');// Идентификатор файла, чтобы сервер знал, что мы загружаем
 xhrPost.send(JSON.stringify(note));//тип ответа json нравится больше,поэтому используем JSON.stringify и отправляем данные как строку. 
     //JSON- глобальная автоматическая переменная с автоматическим свойством stringify, которая форматирует переменную в строку. 
     //Нам же нужно отформатировать объект note в строку и отправить на post серверу.
-}
-
-if ((document.getElementById("Completed").checked==false)&&(document.getElementById("Medium").checked==false)&&(document.getElementById("High").checked==false)&&(document.getElementById("Low").checked==false)) function (){
-    
 }
 
 document.getElementById("Completed").addEventListener("change", function(event){
@@ -135,6 +129,10 @@ xhrGet.onerror = function() {
 };
 xhrGet.send(); // Инициирует запрос. Посылаем запрос на сервер.
 
+if ((document.getElementById("Completed").checked==false)&&(document.getElementById("Medium").checked==false)&&(document.getElementById("High").checked==false)&&(document.getElementById("Low").checked==false)) {
+JSON.stringify(xhrGet.response);
+}
+
 const xhrPost = new XMLHttpRequest();
 xhrPost.onload = function (argument) {
     const note = JSON.parse(xhrPost.response);
@@ -151,7 +149,7 @@ function updateNote(itemId, note){
 }
 
 const xhrDelete = new XMLHttpRequest;
-function deleteFromServer(itemId){
+function deleteFromServer(itemId, note){
    const nullObject = null;
    xhrDelete.open('DELETE', url+"/"+itemId.toString());
    xhrDelete.setRequestHeader('Content-type', 'application/json; charset=utf-8');
