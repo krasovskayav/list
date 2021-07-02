@@ -1,4 +1,4 @@
-const arrNotes = [];
+let arrNotes = [];
     form = document.dwsForm;
 const newEl = document.createElement("textarea");
 const ArrayOfCheckedCheckbox =[];
@@ -118,6 +118,7 @@ const xhrGet = new XMLHttpRequest(); // Создаём локальную пер
 xhrGet.open('GET', url, true); // Задаём метод запроса и URL запроса
 xhrGet.responseType = 'json'; //тип ответа - json
 xhrGet.onload = function() { // Используем обработчик событий onload, чтобы поймать ответ сервера XMLHttpRequest
+arrNotes = xhrGet.response;
 xhrGet.response.forEach((item) => {
  Otrisovka(item);
 });
@@ -129,10 +130,7 @@ xhrGet.onerror = function() {
 };
 xhrGet.send(); // Инициирует запрос. Посылаем запрос на сервер.
 
-if ((document.getElementById("Completed").checked==false)&&(document.getElementById("Medium").checked==false)&&(document.getElementById("High").checked==false)&&(document.getElementById("Low").checked==false)) {
-JSON.stringify(xhrGet.response);
-}
-
+if (ArrayOfCheckedCheckbox.length == 0) contentArea.innerHTML= JSON.parse(xhrGet.response);
 const xhrPost = new XMLHttpRequest();
 xhrPost.onload = function (argument) {
     const note = JSON.parse(xhrPost.response);
