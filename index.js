@@ -110,7 +110,6 @@ function ClickonPr(event){
         arrNotes.forEach(function(note){
        Otrisovka(note);
     });
-        contentArea.innerHTML= JSON.parse(arrNotes);
     }
     const FilteredNotes = arrNotes.filter((arrNote) => ArrayOfCheckedCheckbox.includes(arrNote.prioritet));
     FilteredNotes.forEach(function(note){
