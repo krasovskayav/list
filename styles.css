@@ -120,3 +120,20 @@ textarea {
   border: 1px solid white;
   margin:0 auto; // отцентрирует блок по центру родительского элемента
 }
+
+.checkbox {
+    font-family: "Times New Roman";
+    font-size: 11pt;
+      width:30%;
+  resize: vertical;
+  padding:15px;
+  border-radius:15px;
+  border:0;
+  box-shadow:4px 4px 10px rgba(0,0,0,0.06);
+  height:50px;
+      display:block;
+  position: relative;
+  border: 1px solid white;
+  margin:0 auto; // отцентрирует блок по центру родительского элемента
+
+}
