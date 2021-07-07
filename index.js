@@ -9,9 +9,16 @@ function ClickOnEdit(noteText) {
     noteText.replaceWith(newEl);
 }
 
-function ClickOnDeletebtn(noteText, note) { 
+function ClickOnDeletebtn(save, edit, deletebtn, noteText, note, noteId, notePrioritet, noteDate) { 
         noteText.remove();
+        noteId.remove();
+        noteDate.remove();
+        notePrioritet.remove();
+        save.remove();
+        edit.remove();
+        deletebtn.remove();
         deleteFromServer(note.id, note);
+
     }
 
 function ClickOnSave(noteText, note) {
@@ -49,7 +56,7 @@ function Otrisovka(note){
     const deletebtn = document.createElement("button");
     deletebtn.innerHTML = "delete";
     deletebtn.addEventListener('click',function(){
-        ClickOnDeletebtn(noteText, note);
+        ClickOnDeletebtn(noteText, note, noteId, notePrioritet, noteDate);
     });
     
     box.appendChild(noteId);
