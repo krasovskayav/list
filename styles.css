@@ -14,13 +14,13 @@ h1 {
  text-transform: uppercase;
  background: #86a8e7;
  color: white;
- margin: 0;
  padding: 10px 28px;
  font-weight: normal;
  display:block;
  position: relative;
  border: 1px solid white;
  margin:0 auto; // отцентрирует блок по центру родительского элемента
+ 
 }
 
 label {
@@ -90,22 +90,6 @@ select {
 }
 
 textarea {
-    font-family: "Times New Roman";
-    font-size: 11pt;
-  width:30%;
-  resize: vertical;
-  padding:15px;
-  border-radius:15px;
-  border:0;
-  box-shadow:4px 4px 10px rgba(0,0,0,0.06);
-  height:50px;
-  display:block;
-  position: relative;
-  border: 1px solid white;
-  margin:0 auto; // отцентрирует блок по центру родительского элемента
-}
-
-#contentArea {
     font-family: "Times New Roman";
     font-size: 11pt;
   width:30%;
