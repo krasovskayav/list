@@ -1,7 +1,8 @@
-*body {
-    background-color: #ab0f0f;
+body {
+    background-color: OldLace;
 }
-* {
+
+{
   box-sizing:border-box;
 }
 
@@ -11,7 +12,7 @@ h1 {
     font-size: 11pt; // размер текста
  font-weight: normal;
  color: white; // цвет текста
- background: #86a8e7; // цвет фона
+ background: MidnightBlue; // цвет фона
  height: 60px; // высота длина элемента
  width:30%; // ширина элемента
  padding: 10px 30px;
