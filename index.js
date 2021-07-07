@@ -2,32 +2,31 @@ let arrNotes = [];
     form = document.dwsForm;
 const newEl = document.createElement("textarea");
 const ArrayOfCheckedCheckbox =[];
- const contentArea = document.getElementById("contentArea");
+const contentArea = document.getElementById("contentArea");
 
 function ClickOnEdit(noteText) {
     newEl.value = noteText.textContent;
     noteText.replaceWith(newEl);
 }
 
-function ClickOnDeletebtn(save, edit, deletebtn, noteText, note, noteId, notePrioritet, noteDate) { 
-        noteText.remove();
-        noteId.remove();
-        noteDate.remove();
-        notePrioritet.remove();
-        save.remove();
-        edit.remove();
-        deletebtn.remove();
-        deleteFromServer(note.id, note);
-
-    }
+function ClickOnDeletebtn(note, noteId, noteText, notePrioritet, noteDate, save, edit, deletebtn) { 
+    noteText.remove();
+    noteId.remove();
+    notePrioritet.remove();
+    noteDate.remove();
+    save.remove();
+    edit.remove();
+    deletebtn.remove();
+    deleteFromServer(note.id, note);
+}
 
 function ClickOnSave(noteText, note) {
-        if(!newEl.value) return;
-        noteText.textContent = newEl.value;
-        note.text=newEl.value;
-        updateNote(note.id, note);
-        newEl.replaceWith(noteText);
-    }
+    if(!newEl.value) return;
+    noteText.textContent = newEl.value;
+    note.text=newEl.value;
+    updateNote(note.id, note);
+    newEl.replaceWith(noteText);
+}
     
 function Otrisovka(note){
     const box = document.createElement("div");
@@ -56,7 +55,7 @@ function Otrisovka(note){
     const deletebtn = document.createElement("button");
     deletebtn.innerHTML = "delete";
     deletebtn.addEventListener('click',function(){
-        ClickOnDeletebtn(noteText, note, noteId, notePrioritet, noteDate);
+        ClickOnDeletebtn(note, noteId, noteText, notePrioritet, noteDate,save, edit, deletebtn);
     });
     
     box.appendChild(noteId);
@@ -81,40 +80,40 @@ function prClick() {
 
     form.reset();
 
-xhrPost.open('POST', url, true);
-xhrPost.setRequestHeader('Content-type', 'application/json; charset=utf-8');// Идентификатор файла, чтобы сервер знал, что мы загружаем
-xhrPost.send(JSON.stringify(note));//тип ответа json нравится больше,поэтому используем JSON.stringify и отправляем данные как строку. 
-    //JSON- глобальная автоматическая переменная с автоматическим свойством stringify, которая форматирует переменную в строку. 
-    //Нам же нужно отформатировать объект note в строку и отправить на post серверу.
+    xhrPost.open('POST', url, true);
+    xhrPost.setRequestHeader('Content-type', 'application/json; charset=utf-8');// Идентификатор файла, чтобы сервер знал, что мы загружаем
+    xhrPost.send(JSON.stringify(note));//тип ответа json нравится больше,поэтому используем JSON.stringify и отправляем данные как строку. 
+        //JSON- глобальная автоматическая переменная с автоматическим свойством stringify, которая форматирует переменную в строку. 
+        //Нам же нужно отформатировать объект note в строку и отправить на post серверу.
 }
 
 document.getElementById("Completed").addEventListener("change", function(event){
-ClickonPr(event);
+    ClickonPr(event);
 });
 
 document.getElementById("Medium").addEventListener("change", function(event){
-ClickonPr(event);
+    ClickonPr(event);
 });
 
 document.getElementById("High").addEventListener("change", function(event){
-ClickonPr(event);
+    ClickonPr(event);
 });
 
 document.getElementById("Low").addEventListener("change", function(event){
-ClickonPr(event);
+    ClickonPr(event);
 });
 
 function ClickonPr(event){
     contentArea.innerHTML = "";
     if (event.target.checked) ArrayOfCheckedCheckbox.push(event.target.id);
     else {
-        ArrayOfCheckedCheckbox.splice(ArrayOfCheckedCheckbox.indexOf(event.target.id),1);
+       ArrayOfCheckedCheckbox.splice(ArrayOfCheckedCheckbox.indexOf(event.target.id),1);
     }
     //const FilteredNotes = arrNotes.filter(function (arrNote){
     //return ArrayOfCheckedCheckbox.includes(arrNote.prioritet);
     //});
     if (ArrayOfCheckedCheckbox.length == 0) {
-        arrNotes.forEach(function(note){
+       arrNotes.forEach(function(note){
        Otrisovka(note);
     });
     }
@@ -132,13 +131,13 @@ xhrGet.responseType = 'json'; //тип ответа - json
 xhrGet.onload = function() { // Используем обработчик событий onload, чтобы поймать ответ сервера XMLHttpRequest
 arrNotes = xhrGet.response;
 xhrGet.response.forEach((item) => {
- Otrisovka(item);
+    Otrisovka(item);
 });
- console.log(xhrGet.response) // Выводим в консоль содержимое ответа сервера. Это строка!
+    console.log(xhrGet.response) // Выводим в консоль содержимое ответа сервера. Это строка!
   //console.log(JSON.parse(xhrGet.response))//Выводим в консоль содержимое ответа сервера. Метод JSON.parse() разбирает строку JSON на объект.
 };
 xhrGet.onerror = function() {
-  alert("Запрос не удался");
+    alert("Запрос не удался");
 };
 xhrGet.send(); // Инициирует запрос. Посылаем запрос на сервер.
 
@@ -159,8 +158,8 @@ function updateNote(itemId, note){
 
 const xhrDelete = new XMLHttpRequest;
 function deleteFromServer(itemId, note){
-   const nullObject = null;
-   xhrDelete.open('DELETE', url+"/"+itemId.toString());
-   xhrDelete.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-   xhrDelete.send(nullObject);
-  }
+    const nullObject = null;
+    xhrDelete.open('DELETE', url+"/"+itemId.toString());
+    xhrDelete.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+    xhrDelete.send(nullObject);
+}
