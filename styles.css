@@ -1,123 +1,23 @@
-/*body {
-    background-color: Snow;
+*body {
+    background-color: #ab0f0f;
 }
-
 * {
   box-sizing:border-box;
 }
+
 h1 {
-    font-family: "Times New Roman";
-    font-size: 11pt;
- height: 40px;
- width:30%;
- text-align: center;
- text-transform: uppercase;
- background: #86a8e7;
- color: white;
- padding: 10px 30px;
+    font-family: "Times New Roman"; // шрифт
+    text-transform: uppercase; // курсив
+    font-size: 11pt; // размер текста
  font-weight: normal;
- display:block;
- position: relative;
- border: 1px solid white;
- margin:0 auto; // отцентрирует блок по центру родительского элемента
- 
-}
-
-label {
-    font-family: "Times New Roman";
-    font-size: 11pt;
- text-align: center;
- border-bottom:1px solid #eee; // add only bottom border
+ color: white; // цвет текста
+ background: #86a8e7; // цвет фона
+ height: 60px; // высота длина элемента
+ width:30%; // ширина элемента
  padding: 10px 30px;
- box-shadow:10 10 15px 4px rgba(0,0,0,0.06);
- border-radius:10px;
- width:30%;
- background-color: LavenderBlush;
- height: 40px;
+ text-align: center; // текст в элементе посередине
  display:block;
  position: relative;
  border: 1px solid white;
  margin:0 auto; // отцентрирует блок по центру родительского элемента
 }
-
-input {
-    font-family: "Times New Roman";
-    font-size: 11pt;
- border-bottom:1px solid #eee; // add only bottom border
- padding: 10px 30px;
- box-shadow:10 10 15px 4px rgba(0,0,0,0.06);
- color: white;
- border-radius:10px;
- width:30%;
- background-color:RoyalBlue;
- height: 40px;
- display:block;
- position: relative;
- border: 1px solid white;
- margin:0 auto; // отцентрирует блок по центру родительского элемента
-}
-
-
-button {
-    font-family: "Times New Roman";
-    font-size: 11pt;
- border-bottom:1px solid #eee; // add only bottom border
- padding: 10px 30px;
- box-shadow:10 10 15px 4px rgba(0,0,0,0.06);
- border-radius:10px;
- width:30%;
- background-color: LavenderBlush;
- height: 40px;
- display:block;
- position: relative;
- border: 1px solid white;
- margin:0 auto; // отцентрирует блок по центру родительского элемента
-}
-
-select {
-    font-family: "Times New Roman";
-    font-size: 11pt;
-  width: 30%;
- padding: 10px 30px;
-  border-radius:10px;
-  border-bottom:1px solid #eee; // add only bottom border
-  box-shadow:10 10 15px 4px rgba(0,0,0,0.06);
-  background-color: LavenderBlush;
-  display:block;
-  position: relative;
-  border: 1px solid white;
-  margin:0 auto; // отцентрирует блок по центру родительского элемента
-}
-
-textarea {
-    font-family: "Times New Roman";
-    font-size: 11pt;
-  width:30%;
-  resize: vertical;
-  padding:15px;
-  border-radius:15px;
-  border:0;
-  box-shadow:4px 4px 10px rgba(0,0,0,0.06);
-  height:50px;
-  display:block;
-  position: relative;
-  border: 1px solid white;
-  margin:0 auto; // отцентрирует блок по центру родительского элемента
-}
-
-.checkbox {
-    font-family: "Times New Roman";
-    font-size: 11pt;
-      width:30%;
-  resize: vertical;
- padding: 10px 30px;
-  border-radius:15px;
-  border:0;
-  box-shadow:4px 4px 10px rgba(0,0,0,0.06);
-  height:50px;
-      display:block;
-  position: relative;
-  border: 1px solid white;
-  margin:0 auto; // отцентрирует блок по центру родительского элемента
-
-}*/
