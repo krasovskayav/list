@@ -2,23 +2,137 @@ body {
     background-color: OldLace;
 }
 
-{
-  box-sizing:border-box;
+*, *:before, *:after {
+  box-sizing: border-box;
 }
 
 h1 {
-    font-family: "Times New Roman"; // шрифт
-    text-transform: uppercase; // курсив
-    font-size: 11pt; // размер текста
+    font-family: "Times New Roman";
+    text-transform: uppercase;
+    font-size: 15pt;
+    background: #86a8e7;
+    color: white;
  font-weight: normal;
- color: white; // цвет текста
- background: MidnightBlue; // цвет фона
- height: 60px; // высота длина элемента
- width:30%; // ширина элемента
- padding: 10px 30px;
- text-align: center; // текст в элементе посередине
+ height: 40px;
+ width:30%;
+ padding: 10px 20px;
+ text-align: center;
  display:block;
- position: relative;
+ margin:0 auto;
+}
+
+label{
+    font-family: "Times New Roman";
+    text-transform: capitalize;
+    font-size: 12pt;
+    background: LavenderBlush;
+    color: black;
+ font-weight: normal;
+ height: 30px;
+ width:30%;
+ padding: 10px 20px;
+ text-align: center;
+ display:block;
+ margin:0 auto;
+}
+
+select{
+    font-family: "Times New Roman";
+    text-transform: capitalize;
+    font-size: 12pt;
+    background: LavenderBlush;
+    color: black;
+ font-weight: normal;
+ height: 40px;
+ width:30%;
+ padding: 10px 20px;
+ text-align: center;
+ display:block;
  border: 1px solid white;
- margin:0 auto; // отцентрирует блок по центру родительского элемента
+ margin:0 auto;
+}
+
+textarea{
+    font-family: "Times New Roman";
+    font-size: 12pt;
+    background: LavenderBlush;
+    color: black;
+ font-weight: normal;
+ height: 40px;
+ width:30%;
+ padding: 10px 20px;
+ display:block;
+ border: 1px solid white;
+ margin:0 auto;
+}
+
+input[type="button"]{
+    font-family: "Times New Roman";
+    font-size: 12pt;
+    text-transform: uppercase;
+    background: RoyalBlue;
+    color: white;
+ font-weight: normal;
+ height: 50px;
+ width: 30%;
+ padding: 10px 20px;
+ display:block;
+ border: 1px solid white;
+ margin:0 auto;
+}
+
+input[type="checkbox"]{
+    font-family: "Times New Roman";
+    font-size: 12pt;
+    text-transform: uppercase;
+    background: RoyalBlue;
+    color: white;
+ font-weight: normal;
+ padding: 10px 20px;
+ display: inline;
+ border: 1px solid white;
+ margin:0 auto;
+ height:30px;
+ width:150px;
+}
+
+span {
+    font-family: "Times New Roman";
+    font-size: 12pt;
+    background: LavenderBlush;
+    color: black;
+ font-weight: normal;
+ padding: 10px 20px;
+ display:inline;
+ border: 1px solid white;
+ height:40px;
+ width:150px;
+}
+
+#contentArea {
+    font-family: "Times New Roman";
+    font-size: 12pt;
+    color: MediumBlue;
+    text-align: center;
+ font-weight: normal;
+ height: 40px;
+ width:30%;
+ padding: 10px 20px;
+ display:block;
+ margin:0 auto;
+}
+
+button{
+        font-family: "Times New Roman";
+    font-size: 12pt;
+    text-transform: uppercase;
+    background: CornflowerBlue;
+    color: white;
+ font-weight: normal;
+ height: 50px;
+ width: 30%;
+ padding: 10px 20px;
+ display:inline;
+ border: 1px solid white;
+ margin:0 auto;
 }
